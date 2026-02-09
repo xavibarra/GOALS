@@ -1,0 +1,24 @@
+{
+  "app": {
+    "title": "Goals",
+    "tabs": {
+      "goals": "Objectius",
+      "restaurants": "Restaurants"
+    }
+  },
+  "auth": {
+    "login": "Entrar",
+    "register": "Crear compte",
+    "email": "Correu electrònic",
+    "password": "Contrasenya"
+  },
+  "goals": {
+    "title": "Llista abans de morir",
+    "counter": "{{completed}} / {{total}} completades",
+    "new_placeholder": "Nova cosa abans de morir...",
+    "add": "Afegir"
+  },
+  "common": {
+    "logout": "Sortir"
+  }
+}

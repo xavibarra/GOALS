@@ -1,0 +1,24 @@
+{
+  "app": {
+    "title": "Goals",
+    "tabs": {
+      "goals": "Objetivos",
+      "restaurants": "Restaurantes"
+    }
+  },
+  "auth": {
+    "login": "Entrar",
+    "register": "Crear cuenta",
+    "email": "Email",
+    "password": "Contraseña"
+  },
+  "goals": {
+    "title": "Lista antes de morir",
+    "counter": "{{completed}} / {{total}} completadas",
+    "new_placeholder": "Nueva cosa antes de morir...",
+    "add": "Añadir"
+  },
+  "common": {
+    "logout": "Salir"
+  }
+}
