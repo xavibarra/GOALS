@@ -1,15 +1,14 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import AddGoalForm from "../components/AddGoalForm";
+import GoalsList from "../components/GoalsList";
 import { useGoals } from "../hooks/useGoals";
-import AddGoalForm from "./AddGoalForm";
-import GoalsList from "./GoalsList";
 
 export default function GoalsPage() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { goals, loading, completed, total, addGoal, toggleDone } =
     useGoals(true);
   const [newGoal, setNewGoal] = useState("");
-  const { i18n } = useTranslation();
 
   const submit = async () => {
     const title = newGoal.trim();
@@ -19,17 +18,10 @@ export default function GoalsPage() {
   };
 
   return (
-    <div>
-      <select
-        value={i18n.language}
-        onChange={(e) => i18n.changeLanguage(e.target.value)}
-      >
-        <option value="es">ES</option>
-        <option value="ca">CA</option>
-        <option value="en">EN</option>
-      </select>
-      <h1>{t("goals.title")}</h1>
-      <p>{t("goals.counter", { completed, total })}</p>
+    <div className="bg-brand-background">
+      <h1 className="text-brand-text text-center text-5xl font-bold mb-12">
+        {t("goals.title")}
+      </h1>
 
       <AddGoalForm
         value={newGoal}
@@ -38,6 +30,9 @@ export default function GoalsPage() {
         loading={loading}
       />
 
+      <p className="text-brand-accent mb-4">
+        {t("goals.counter", { completed, total })}
+      </p>
       <GoalsList goals={goals} onToggle={toggleDone} />
     </div>
   );

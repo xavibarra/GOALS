@@ -1,23 +1,25 @@
+import { Navigate, Route, Routes } from "react-router-dom";
 import Auth from "./components/Auth";
-import GoalsPage from "./components/GoalsPage";
 import { useSession } from "./hooks/useSession";
-import { supabase } from "./lib/supabase";
+
+import AppLayout from "./layouts/AppLayout";
+import GoalsPage from "./pages/GoalsPage";
+import ProfilePage from "./pages/ProfilePage";
+import RestaurantsPage from "./pages/RestaurantsPage";
 
 export default function App() {
   const session = useSession();
 
-  const logout = async () => {
-    await supabase.auth.signOut();
-  };
-
   if (!session) return <Auth />;
 
   return (
-    <div
-      style={{ maxWidth: 600, margin: "40px auto", fontFamily: "system-ui" }}
-    >
-      <button onClick={logout}>Logout</button>
-      <GoalsPage />
-    </div>
+    <Routes>
+      <Route element={<AppLayout />}>
+        <Route path="/" element={<Navigate to="/goals" replace />} />
+        <Route path="/goals" element={<GoalsPage />} />
+        <Route path="/restaurants" element={<RestaurantsPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
+      </Route>
+    </Routes>
   );
 }

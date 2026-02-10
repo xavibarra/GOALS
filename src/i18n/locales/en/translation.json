@@ -13,7 +13,7 @@
     "password": "Password"
   },
   "goals": {
-    "title": "Before I die list",
+    "title": "Bucket List",
     "counter": "{{completed}} / {{total}} completed",
     "new_placeholder": "New thing before I die...",
     "add": "Add"
