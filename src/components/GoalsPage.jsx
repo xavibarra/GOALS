@@ -9,6 +9,7 @@ export default function GoalsPage() {
   const { goals, loading, completed, total, addGoal, toggleDone } =
     useGoals(true);
   const [newGoal, setNewGoal] = useState("");
+  const { i18n } = useTranslation();
 
   const submit = async () => {
     const title = newGoal.trim();
@@ -19,6 +20,14 @@ export default function GoalsPage() {
 
   return (
     <div>
+      <select
+        value={i18n.language}
+        onChange={(e) => i18n.changeLanguage(e.target.value)}
+      >
+        <option value="es">ES</option>
+        <option value="ca">CA</option>
+        <option value="en">EN</option>
+      </select>
       <h1>{t("goals.title")}</h1>
       <p>{t("goals.counter", { completed, total })}</p>
 
