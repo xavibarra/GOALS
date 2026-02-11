@@ -17,3 +17,15 @@ export async function toggleGoalDone(id, isDone) {
     .update({ is_done: !isDone })
     .eq("id", id);
 }
+
+export async function deleteGoalById(id) {
+  return supabase.from("bucket_items").delete().eq("id", id);
+}
+
+export async function updateGoalTitle(id, title) {
+  const { error } = await supabase
+    .from("bucket_items")
+    .update({ title })
+    .eq("id", id);
+  if (error) throw { error };
+}

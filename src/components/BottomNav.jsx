@@ -1,10 +1,11 @@
-import { Target, User, UtensilsCrossed } from "lucide-react";
+import { Globe, Target, User, UtensilsCrossed } from "lucide-react";
 import { NavLink } from "react-router-dom";
 
 export default function BottomNav() {
   const items = [
     { to: "/goals", label: "Goals", icon: Target },
     { to: "/restaurants", label: "Restaurants", icon: UtensilsCrossed },
+    { to: "/countries", label: "Countries", icon: Globe },
   ];
 
   return (

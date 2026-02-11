@@ -6,8 +6,16 @@ import { useGoals } from "../hooks/useGoals";
 
 export default function GoalsPage() {
   const { t, i18n } = useTranslation();
-  const { goals, loading, completed, total, addGoal, toggleDone } =
-    useGoals(true);
+  const {
+    goals,
+    loading,
+    completed,
+    total,
+    addGoal,
+    toggleDone,
+    deleteGoal,
+    editGoal,
+  } = useGoals(true);
   const [newGoal, setNewGoal] = useState("");
 
   const submit = async () => {
@@ -33,7 +41,12 @@ export default function GoalsPage() {
       <p className="text-brand-accent mb-4">
         {t("goals.counter", { completed, total })}
       </p>
-      <GoalsList goals={goals} onToggle={toggleDone} />
+      <GoalsList
+        goals={goals}
+        onToggle={toggleDone}
+        onDelete={deleteGoal}
+        onEdit={editGoal}
+      />
     </div>
   );
 }

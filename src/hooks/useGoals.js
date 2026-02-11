@@ -1,8 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
 import {
   createGoal,
+  deleteGoalById,
   fetchGoals,
   toggleGoalDone,
+  updateGoalTitle,
 } from "../services/goals.service";
 
 export function useGoals(enabled) {
@@ -30,9 +32,19 @@ export function useGoals(enabled) {
     await reload();
   };
 
+  const deleteGoal = async (goal) => {
+    await deleteGoalById(goal.id);
+    await reload();
+  };
+
+  const editGoal = async (goal, title) => {
+    await updateGoalTitle(goal.id, title);
+    await reload();
+  };
+
   const completed = useMemo(
     () => goals.filter((g) => g.is_done).length,
-    [goals]
+    [goals],
   );
 
   return {
@@ -43,5 +55,7 @@ export function useGoals(enabled) {
     addGoal,
     toggleDone,
     reload,
+    deleteGoal,
+    editGoal,
   };
 }
