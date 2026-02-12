@@ -7,8 +7,12 @@ import {
   Search,
 } from "lucide-react";
 import { useMemo, useState } from "react";
+import { ComposableMap, Geographies, Geography } from "react-simple-maps";
 
 const REGIONS = ["Europe", "Americas", "Africa", "Asia", "Oceania"];
+
+const MAP_URL =
+  "https://raw.githubusercontent.com/BolajiBI/topojson-maps/master/world-countries.json";
 
 const STARTER_COUNTRIES = [
   // Europe
@@ -95,6 +99,7 @@ export default function CountriesPage() {
   const [region, setRegion] = useState("All");
   const [status, setStatus] = useState("all"); // all | visited | unvisited
   const [sort, setSort] = useState("name"); // name | region
+  const [showMap, setShowMap] = useState(false);
 
   // Starter: guardamos visitados en memoria (luego lo persistimos en Supabase)
   const [visited, setVisited] = useState(() => new Set(["ES", "FR"]));
@@ -163,6 +168,12 @@ export default function CountriesPage() {
           <p className="mt-1 text-sm text-brand-muted">
             Marca los países donde has estado.
           </p>
+          <button
+            onClick={() => setShowMap(true)}
+            className="rounded-xl border border-brand-border bg-brand-surface px-3 py-2 text-sm text-brand-muted hover:text-brand-text transition"
+          >
+            Open map
+          </button>
         </div>
 
         <div className="rounded-2xl border border-brand-border bg-brand-surface px-4 py-3">
@@ -326,6 +337,90 @@ export default function CountriesPage() {
           ))
         )}
       </div>
+      {showMap && (
+        <div className="fixed inset-0 z-[60]">
+          {/* Backdrop */}
+          <button
+            className="absolute inset-0 bg-black/40"
+            onClick={() => setShowMap(false)}
+            aria-label="Close map"
+          />
+
+          {/* Panel */}
+          <div className="absolute inset-x-0 top-6 mx-auto w-[min(1000px,calc(100%-2rem))] rounded-2xl border border-brand-border bg-brand-surface shadow-xl overflow-hidden">
+            <div className="flex items-center justify-between px-4 py-3 border-b border-brand-border">
+              <div className="text-sm font-semibold text-brand-text">
+                World map (click to toggle visited)
+              </div>
+              <button
+                onClick={() => setShowMap(false)}
+                className="text-sm text-brand-muted hover:text-brand-text transition"
+              >
+                Close
+              </button>
+            </div>
+
+            <div className="p-3">
+              <div className="rounded-2xl border border-brand-border bg-[#0b1220]/[0.02] overflow-hidden">
+                <ComposableMap
+                  projectionConfig={{ scale: 160 }}
+                  style={{ width: "100%", height: "auto" }}
+                >
+                  <Geographies geography={MAP_URL}>
+                    {({ geographies }) =>
+                      geographies.map((geo) => {
+                        const iso2 = geo?.properties?.iso_a2; // <-- clave
+                        const isDone = iso2 && visited.has(iso2);
+
+                        return (
+                          <Geography
+                            key={geo.rsmKey}
+                            geography={geo}
+                            onClick={() => {
+                              if (!iso2) return; // algunos shapes no tienen iso
+                              toggleVisited(iso2);
+                            }}
+                            style={{
+                              default: {
+                                fill: isDone ? "currentColor" : "transparent",
+                                color: isDone
+                                  ? "rgba(99, 102, 241, 0.9)"
+                                  : undefined, // usa tu color (brand-accent)
+                                stroke: "rgba(148, 163, 184, 0.35)",
+                                strokeWidth: 0.6,
+                                outline: "none",
+                              },
+                              hover: {
+                                fill: isDone
+                                  ? "currentColor"
+                                  : "rgba(99, 102, 241, 0.12)",
+                                color: "rgba(99, 102, 241, 0.95)",
+                                stroke: "rgba(148, 163, 184, 0.6)",
+                                strokeWidth: 0.8,
+                                outline: "none",
+                                cursor: iso2 ? "pointer" : "default",
+                              },
+                              pressed: {
+                                fill: "rgba(99, 102, 241, 0.22)",
+                                outline: "none",
+                              },
+                            }}
+                          />
+                        );
+                      })
+                    }
+                  </Geographies>
+                </ComposableMap>
+              </div>
+
+              <p className="mt-3 text-xs text-brand-muted">
+                Tip: puedes marcar países desde el mapa o desde la lista. (Luego
+                lo persistimos en Supabase).
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
