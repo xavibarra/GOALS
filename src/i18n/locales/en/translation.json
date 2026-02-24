@@ -20,5 +20,34 @@
   },
   "common": {
     "logout": "Logout"
+  },
+  "countries": {
+    "controls": {
+      "searchPlaceholder": "Search country...",
+      "allRegions": "All regions",
+      "status": {
+        "all": "All",
+        "visited": "Visited",
+        "pending": "Pending"
+      },
+      "sortTitle": "Change order",
+      "sortLabel": "Sort: {{by}}",
+      "sortBy": {
+        "name": "Name",
+        "region": "Region"
+      }
+    },
+    "regions": {
+      "europe": "Europe",
+      "americas": "Americas",
+      "africa": "Africa",
+      "asia": "Asia",
+      "oceania": "Oceania"
+    },
+    "page": {
+      "loading": "Loading countries...",
+      "mapModalTitle": "World map (click to toggle visited)",
+      "mapTip": "Tip: you can mark countries from the map or from the list."
+    }
   }
 }

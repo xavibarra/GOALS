@@ -20,5 +20,36 @@
   },
   "common": {
     "logout": "Salir"
+  },
+  "countries": {
+    "controls": {
+      "searchPlaceholder": "Buscar país...",
+      "allRegions": "Todas las regiones",
+      "status": {
+        "all": "Todas",
+        "visited": "Visitados",
+        "pending": "Pendientes"
+      },
+      "sortTitle": "Cambiar orden",
+      "sortLabel": "Orden: {{by}}",
+      "sortBy": {
+        "name": "Nombre",
+        "region": "Región"
+      }
+    },
+    "regions": {
+      "europe": "Europa",
+      "americas": "América",
+      "africa": "África",
+      "asia": "Asia",
+      "oceania": "Oceanía"
+    },
+    "countries": {
+      "page": {
+        "loading": "Cargando países...",
+        "mapModalTitle": "Mapa del mundo (haz clic para marcar como visitado)",
+        "mapTip": "Tip: puedes marcar países desde el mapa o desde la lista."
+      }
+    }
   }
 }

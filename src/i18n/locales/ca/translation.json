@@ -20,5 +20,36 @@
   },
   "common": {
     "logout": "Sortir"
+  },
+  "countries": {
+    "controls": {
+      "searchPlaceholder": "Buscar país...",
+      "allRegions": "Totes les regions",
+      "status": {
+        "all": "Totes",
+        "visited": "Visitats",
+        "pending": "Pendents"
+      },
+      "sortTitle": "Canviar ordre",
+      "sortLabel": "Ordre: {{by}}",
+      "sortBy": {
+        "name": "Nom",
+        "region": "Regió"
+      }
+    },
+    "regions": {
+      "europe": "Europa",
+      "americas": "Amèrica",
+      "africa": "Àfrica",
+      "asia": "Àsia",
+      "oceania": "Oceania"
+    },
+    "countries": {
+      "page": {
+        "loading": "Carregant països...",
+        "mapModalTitle": "Mapa del món (fes clic per marcar com a visitat)",
+        "mapTip": "Consell: pots marcar països des del mapa o des de la llista."
+      }
+    }
   }
 }

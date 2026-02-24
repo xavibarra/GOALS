@@ -6,8 +6,8 @@ import {
   ZoomableGroup,
 } from "react-simple-maps";
 
-import { MAP_THEME, getCountryStyle } from "../lib/mapTheme";
-import { getCountryName, getIso2 } from "../lib/mapUtils";
+import { MAP_THEME, getCountryStyle } from "../../lib/mapTheme";
+import { getCountryName, getIso2 } from "../../lib/mapUtils";
 
 const DEFAULT_MAP_URL =
   "https://raw.githubusercontent.com/BolajiBI/topojson-maps/master/world-countries.json";

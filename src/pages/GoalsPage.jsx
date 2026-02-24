@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import AddGoalForm from "../components/AddGoalForm";
-import GoalsList from "../components/GoalsList";
+import AddGoalForm from "../components/goals/AddGoalForm";
+import GoalsList from "../components/goals/GoalsList";
 import { useGoals } from "../hooks/useGoals";
 
 export default function GoalsPage() {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const {
     goals,
     loading,

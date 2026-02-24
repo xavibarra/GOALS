@@ -1,15 +1,18 @@
 import { useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useCountries } from "../hooks/useCountries";
 
-import CountriesControls from "../components/CountriesControls";
-import CountriesGroupedList from "../components/CountriesGroupedList";
-import CountriesHeader from "../components/CountriesHeader";
+import CountriesControls from "../components/countries/CountriesControls";
+import CountriesGroupedList from "../components/countries/CountriesGroupedList";
+import CountriesHeader from "../components/countries/CountriesHeader";
+import WorldMap from "../components/countries/WorldMap";
 import Modal from "../components/Modal";
-import WorldMap from "../components/WorldMap";
 
 const REGIONS = ["Europe", "Americas", "Africa", "Asia", "Oceania"];
 
 export default function CountriesPage() {
+  const { t } = useTranslation();
+
   // UI filters
   const [query, setQuery] = useState("");
   const [region, setRegion] = useState("All");
@@ -29,6 +32,7 @@ export default function CountriesPage() {
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     let list = Array.isArray(countries) ? countries.slice() : [];
+
     if (region !== "All") {
       list = list.filter((c) => c.region === region);
     }
@@ -88,7 +92,9 @@ export default function CountriesPage() {
       {/* Status (loading / error) */}
       {loading && (
         <div className="mt-6 rounded-2xl border border-brand-border bg-brand-surface p-6">
-          <p className="text-sm text-brand-muted">Loading countries...</p>
+          <p className="text-sm text-brand-muted">
+            {t("countries.page.loading")}
+          </p>
         </div>
       )}
 
@@ -110,12 +116,12 @@ export default function CountriesPage() {
       {/* Map modal */}
       <Modal
         open={showMap}
-        title="World map (click to toggle visited)"
+        title={t("countries.page.mapModalTitle")}
         onClose={() => setShowMap(false)}
       >
         <WorldMap visited={visited} onToggleVisited={toggleVisited} />
         <p className="mt-3 text-xs text-brand-muted">
-          Tip: puedes marcar países desde el mapa o desde la lista.
+          {t("countries.page.mapTip")}
         </p>
       </Modal>
     </div>
